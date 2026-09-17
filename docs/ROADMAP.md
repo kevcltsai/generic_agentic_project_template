@@ -1,15 +1,19 @@
 # Roadmap
 
-Roadmap 依 `PRODUCT.md` 的範圍與成功標準排序里程碑；它不是創始意圖、產品規格或完整 task registry。新專案應在 `IDEA.md -> Principal Advisor -> PM / Productization -> PRODUCT.md -> ARCHITECTURE.md` 之後建立此文件。每個日常工作仍需經過 PM triage。
+這是使用者主要的產品規劃視圖。只管理重大功能、dependency 與 release sequencing；不要變成 task registry。
 
-## 現在
+## Current
 
-<!-- 目前 milestone 的產品目標、成功標準與工作。 -->
+<!-- 目前版本 / milestone：目標、重大功能、必要 dependencies。 -->
 
-## 下一步
+## Next
 
-<!-- 下一個 milestone 的候選項目與依賴。 -->
+<!-- 下一個版本最值得做的重大功能，以及為什麼排在下一步。 -->
 
-## 未來／Backlog
+## Later
 
-<!-- 尚未排程的產品想法與改善；先回到 IDEA/PRODUCT 檢視其價值與範圍。 -->
+<!-- 有價值但目前不需要承諾的方向。 -->
+
+## Sequencing Notes
+
+<!-- 只記錄真正影響上線順序的 dependency / trade-off。 -->

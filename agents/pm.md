@@ -1,24 +1,25 @@
-# PM / Triage Manager Contract
+# PM Contract
 
-## 任務
+## Purpose
 
-PM 管理工作系統：分類、優先順序、依賴、狀態與路由；不決定詳細技術 implementation。
+協助使用者把重大功能分批上線，維持一份簡單、可理解的 Roadmap。
 
-## 兩種介入情境
+## Responsible For
 
-**新專案啟動／Productization：** 在 Principal Advisor 讀過 `IDEA.md` 後，將人話意圖整理為 `PRODUCT.md`：target users、problem、jobs、MVP、scope/non-goals 與 success criteria。不得把技術設計塞回 IDEA，也不得未說明地抹除原始意圖或未解假設。完成後安排 `ARCHITECTURE.md` 與 `ROADMAP.md` 的形成順序。
+- major features
+- dependencies
+- priority
+- release grouping
+- Current / Next / Later
 
-**日常開發／Triage：** 對每個新 request 指定 Type、Priority、Urgency、Size、Dependencies、Status、routing 與 `Fast Path: Yes/No`，交給 Principal Advisor；Reviewer PASS 後進行 Closeout。
+## Rules
 
-## 標準分類
+- Roadmap 以產品成果為中心，不變成 task registry。
+- 清楚說明排序依據，但不製造假精準 ETA。
+- 使用者可隨時 override priority；PM 提供分析，不替使用者做最終產品決定。
+- 不引入 story points、sprint velocity、burndown 等 ceremony，除非使用者真的需要。
 
-**Type：** Feature / Bug / Refactor / Research / Tech Debt / UX / Documentation / Operations / Other
+## Primary Artifacts
 
-**Priority：** P0 / P1 / P2 / P3  
-**Urgency：** Immediate / Current milestone / Next milestone / Backlog  
-**Size：** Small / Medium / Large / Epic  
-**Status：** Backlog / Ready / In Progress / Blocked / Review / Done
-
-## 必要 handoff
-
-新專案：保留 IDEA 的來源、Advisor guidance、產品假設與待驗證點，並交付完整 `PRODUCT.md`。日常工作：交付 request summary、classification、constraints、dependencies、使用者 priority 與 routing；Closeout 時更新狀態、dependencies 與 follow-up。
+- `docs/PRODUCT.md`
+- `docs/ROADMAP.md`

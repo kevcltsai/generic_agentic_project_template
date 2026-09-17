@@ -1,34 +1,51 @@
-# Generic Agentic Project Template
+# Generic Agentic Project Template — 中文版
 
-這是一個可重複使用、用於 agentic 軟體專案的 Day-0 骨架。不綁定 framework、語言或部署平台。
+一套給個人與 AI 協作開發使用的輕量 Template。優先順序是：
 
-## 兩套流程
+1. **Light**：流程與文件保持最少必要量。
+2. **Token-efficient**：只載入下一步需要的 context，避免重複閱讀與長篇 handoff。
+3. **Intent Fidelity**：先理解並忠實保留使用者意圖；不自行擴張需求。
+4. **Reliable enough**：用 acceptance criteria、deterministic validation 與必要時的獨立 review 維持基本可靠性。
 
-### 新專案啟動
+## 使用模型
 
-`docs/IDEA.md -> Principal Advisor -> PM / Productization -> docs/PRODUCT.md -> docs/ARCHITECTURE.md -> docs/ROADMAP.md -> 第一條 Thin Vertical Slice`
+日常只需要四個邏輯角色：
 
-先以白話記下人想解決的事與理想體驗；Advisor 協助檢視方向，PM 將意圖產品化。產品定義清楚後，才建立架構邊界、里程碑與驗證起點。
+- **Advisor**：理解、澄清、簡化與優化需求，不擅自擴張 scope。
+- **PM**：管理重大功能、dependencies、priority、release grouping 與 roadmap。
+- **Builder**：先做精簡 planning，再 implementation 與 validation。
+- **Reviewer**：僅在一般 feature 或中高風險變更需要獨立驗證時啟用。
 
-### 日常開發
+Orchestration 不是獨立角色。`AGENTS.md` 只用極簡 routing rules 決定下一步。
 
-`User Request -> PM/Triage -> Principal Advisor -> Planner -> Implementer -> Reviewer -> PM/Closeout`
+## 典型互動
 
-簡單、低風險需求可用 `FAST PATH` 壓縮 triage、advice 與 planning，但不能省略 validation。
+### 我有一個功能想法
 
-## 文件順序與邊界
+`User -> Advisor -> (必要時 PM 更新 PRODUCT / ROADMAP)`
 
-- `docs/IDEA.md`：Human intent / source of intent；以完全白話說明為什麼在意、觀察到的問題與想要的體驗。
-- `docs/PRODUCT.md`：目標使用者、問題、jobs、MVP、範圍、非目標與成功標準。
-- `docs/ARCHITECTURE.md`：系統責任邊界與依賴方向。
-- `docs/ROADMAP.md`：產品化後的里程碑與先後順序。
-- `docs/DECISIONS.md`：重要決策與理由。
+先把需求想清楚，不直接寫 code。
 
-## 專案結構
+### 我想看功能怎麼分批上線
 
-- `AGENTS.md`：agent 的工作規則。
-- `agents/`：角色責任與 handoff contracts。
-- `docs/`：意圖、產品、架構、Roadmap、決策與完成標準。
-- `evals/`、`tests/`、`templates/`、`reference/`、`src/`、`scripts/`：驗證、範本、參考資料、程式與協助工具。
+`User -> PM -> ROADMAP.md`
 
-完整流程請讀 `docs/TEMPLATE_USAGE_GUIDE.md`。複製模板後，移除不適用的資料夾即可，不要為保留結構而虛構需求。
+Roadmap 只管理重大功能與 release sequencing，不變成 Jira。
+
+### 我決定開始做
+
+`User -> Builder -> Validation -> Reviewer (when useful) -> Done`
+
+正在執行的工作集中在 `work/CURRENT_TASK.md`。
+
+## 核心文件
+
+- `AGENTS.md`：最小工作規則、routing、context 與 validation 原則。
+- `docs/IDEA.md`：人的原始動機與想像中的體驗。
+- `docs/PRODUCT.md`：目前產品定義與範圍。
+- `docs/ROADMAP.md`：Current / Next / Later 的重大功能與上線順序。
+- `docs/ARCHITECTURE.md`：必要的系統邊界與資料流。
+- `docs/DECISIONS.md`：值得保存的重要決策理由。
+- `work/CURRENT_TASK.md`：目前正在做的唯一工作上下文。
+
+完整使用方式見 `docs/TEMPLATE_USAGE_GUIDE.md`。

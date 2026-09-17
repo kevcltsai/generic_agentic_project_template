@@ -1,31 +1,23 @@
-# 架構
+# Architecture
 
-## 目的
+只記錄 Agent 工作時真的需要知道的系統邊界、重要資料流與 constraints。不要把 codebase 翻譯成長篇文件。
 
-本檔在 `IDEA.md` 與 `PRODUCT.md` 已形成方向後，記錄系統的責任邊界與依賴方向。技術決策的理由請記錄於 `DECISIONS.md`；不要用架構選擇改寫人的原始意圖或產品範圍。
+## Components / Boundaries
 
-## 預設分層
+<!-- 例：UI -> Application -> Domain -> Adapters / Infrastructure -->
 
-```text
-UI / Interface
-    ↓
-Application / Orchestration
-    ↓
-Domain Logic
-    ↓
-Tools / External Adapters
-    ↓
-Storage / Infrastructure
-```
+## Important Data Flow
 
-## 邊界規則
+<!-- 只畫或描述關鍵流程。 -->
 
-- UI 不直接承載 business logic。
-- Domain logic 不依賴具體 UI、vendor SDK 或 infrastructure。
-- 外部 API、LLM、database 與 filesystem 透過 adapters 存取。
-- Orchestration 協調流程，但不應吸收所有 domain rules。
-- 依賴方向由外層指向內層；內層不得反向依賴外層。
+## Constraints
 
-## 專案專屬決策
+<!-- 目前真正會影響 implementation 的限制。 -->
 
-<!-- 在 PRODUCT.md 明確後，補上實際元件、資料流、interfaces 與禁止反轉的 dependency directions。 -->
+## Rules Worth Preserving
+
+- UI 不應承載核心 domain logic。
+- 外部 API / model / database 優先透過清楚的 boundary 或 adapter 隔離。
+- 不為未確定的未來需求預先複雜化架構。
+
+重要「為什麼」請記到 `DECISIONS.md`。

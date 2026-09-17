@@ -1,19 +1,10 @@
-# Agent Team Model
+# Agent Roles
 
-核心團隊有五個角色：PM / Triage Manager、Principal Advisor、Planner、Implementer、Reviewer。
+這些是邏輯角色，不代表每個角色都需要獨立 LLM session。
 
-## 新專案啟動：產品形成流程
+- `advisor.md`：需求理解與最小化。
+- `pm.md`：重大功能與 Roadmap。
+- `builder.md`：plan + implementation + validation。
+- `reviewer.md`：必要時的獨立驗證。
 
-`IDEA.md -> Principal Advisor -> PM / Productization -> PRODUCT.md -> ARCHITECTURE.md -> ROADMAP.md`
-
-這不是日常 task pipeline。`IDEA.md` 由人以白話描述意圖、觀察與期待體驗；Principal Advisor 檢視方向與未知，PM 負責 productization，將意圖整理為 target users、problem、jobs、MVP、scope/non-goals 與 success criteria。Planner、Implementer、Reviewer 只在具體初始化工作需要時加入。
-
-## 日常開發：工作交付流程
-
-`User Request -> PM/Triage -> Principal Advisor -> Planner -> Implementer -> Reviewer -> PM/Closeout`
-
-PM 管工作系統與收尾，Advisor 管方向，Planner 管可執行計畫，Implementer 負責實作與證據，Reviewer 獨立驗證。
-
-## Fast Path 與 Specialists
-
-`FAST PATH` 只壓縮日常開發的 triage、advice 與 planning，保留 validation。Specialists 按風險啟用，不是固定核心角色。
+一般情況優先讓同一個 Primary Working Agent 在不同 phase 切換 Advisor / PM / Builder；只有 Reviewer 的獨立性確實有價值時才分離 context。

@@ -1,13 +1,13 @@
-# ADR-XXX：標題
+# ADR-XXX — Title
 
-**Status：** Proposed / Accepted / Superseded
+**Status:** Proposed / Accepted / Superseded
 
 ## Context
 
 ## Decision
 
-## Alternatives considered
+## Alternatives Considered
 
 ## Trade-offs
 
-## Revisit when
+## Revisit When

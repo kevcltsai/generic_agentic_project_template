@@ -1,11 +1,15 @@
-# 架構決策紀錄（ADRs）
+# Decisions
 
-本檔記錄重要的架構與產品技術決策：背景、選項、決定、取捨，以及何時應重新考慮。它不是目前系統狀態的描述；目前狀態請見 `ARCHITECTURE.md`。
+只記錄值得未來追溯的重要決策。若六個月後很可能有人問「為什麼當初這樣做？」，才需要留下紀錄。
 
-## 索引
+## Index
 
-<!-- 新增 ADR 時，依序連結或附上記錄。 -->
+<!-- 例：ADR-001 — Local-first persistence -->
 
-## 何時寫 ADR
+## 不需要記錄
 
-若六個月後有人可能問「當初為什麼這樣做？」，通常就值得記錄。例如 framework、persistence、auth、API abstraction、agent orchestration、資料相容性或 deployment strategy。
+- 日常小型 implementation choice
+- 很容易從 code 看出的決定
+- 沒有實際 trade-off 的選擇
+
+需要新增 ADR 時，使用 `templates/ADR_TEMPLATE.md`。

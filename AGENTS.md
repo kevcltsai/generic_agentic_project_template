@@ -1,27 +1,62 @@
 # AGENTS.md
 
-## 用途
+本檔只放所有工作都應遵守的最小規則。角色細節見 `agents/`。
 
-本檔定義 AI agents 在此 repository 工作時的預設規則。
+## Core Operating Principles
 
-## 先判斷是哪一種流程
+1. Preserve user intent.
+2. Do not expand scope without explicit approval.
+3. Prefer interpretation over invention.
+4. Prefer the simplest sufficient solution.
+5. Load only the context needed for the next step.
+6. Keep handoffs concise; do not replay full conversation history.
+7. Plan before non-trivial implementation.
+8. Prefer deterministic validation over subjective judging.
+9. Use independent review only when it adds meaningful value.
+10. Context is a budget: minimize redundant reading, generation, and handoffs.
 
-**新專案啟動**使用：`IDEA.md -> Principal Advisor -> PM / Productization -> PRODUCT.md -> ARCHITECTURE.md -> ROADMAP.md`。`IDEA.md` 是 Human intent / source of intent，應以白話保留；PM 才把它轉為產品定義。
+## Routing
 
-**日常開發**使用：`User Request -> PM/Triage -> Principal Advisor -> Planner -> Implementer -> Reviewer -> PM/Closeout`。每個需求都要有比例適當的 PM triage 與 Advisor assessment；簡單、低風險工作可用 `FAST PATH`。
+- 新功能想法、需求探索、需求不清楚 → **Advisor**
+- Priority、版本規劃、重大功能分批、Roadmap → **PM**
+- 使用者明確要求開始做、實作、修 bug → **Builder**
+- 一般 feature 或中高風險完成後，需要獨立驗證 → **Reviewer**
 
-## 開始前
+同一個 runtime 可以依 phase 扮演 Advisor、PM、Builder；角色不代表一定要 spawn 獨立 LLM session。Reviewer 只有在獨立性有價值時才使用獨立 context。
 
-- 日常工作先讀 `README.md`、`docs/PRODUCT.md`、`docs/ARCHITECTURE.md` 與適用的 `docs/DECISIONS.md` ADRs；若工作影響產品意圖或新專案方向，也讀 `docs/IDEA.md`。
-- 新專案先讀並保留 `docs/IDEA.md` 的人話意圖，再進行 Advisor 與 Productization。
-- 先辨識 acceptance criteria；不得假設 API、檔案、命令、schema 或 dependencies 存在。
+## Intent Fidelity
 
-## 角色與實作
+- 先說明對需求的理解，再提出必要的改善。
+- 不把「可能有用」的功能自動加入 scope。
+- 額外想法放在 `Optional / Later`，不得默默變成 acceptance criteria。
+- 若需求已有足夠資訊，直接前進，不為形式而追問。
 
-PM 管分類、優先順序、依賴與路由；Advisor 檢視真正目標、方向、alternatives、trade-offs 與風險，並建議 `PROCEED`、`PROCEED WITH CHANGES`、`RECONSIDER` 或 `NEEDS CLARIFICATION`。Planner 在方向確定後定義 goal、scope/non-goals、步驟、acceptance criteria、validation 與風險。
+## Context Loading
 
-採用滿足任務的最小一致變更，不默默擴張 scope。UI、orchestration、domain logic、tool adapters 與 infrastructure 必須分離；secrets 不進 source control。
+- **Advisor**：user request；必要時只讀相關 `IDEA.md` / `PRODUCT.md`。
+- **PM**：主要讀 `PRODUCT.md` + `ROADMAP.md`。
+- **Builder**：讀 `work/CURRENT_TASK.md` + 相關 `ARCHITECTURE.md`、code、tests。
+- **Reviewer**：讀 `CURRENT_TASK.md` + diff + validation evidence + 相關 requirements。
 
-## 驗證與完成
+不要因為文件存在就全部載入。
 
-可行時優先執行 typecheck、lint、tests、schema/state assertions 與 build checks；只有 deterministic assertions 不足時才使用 LLM evaluation。完成前驗證 acceptance criteria、檢查 regression、同步必要文件。非簡單工作經 Reviewer 獨立驗證後，才由 PM Closeout 更新狀態、dependencies 與 follow-up。完整標準見 `docs/DEFINITION_OF_DONE.md`。
+## Implementation
+
+非 trivial 工作由 Builder 先留下精簡 plan，再開始修改。採用滿足需求的最小一致變更，不順手擴大 refactor 或功能範圍。
+
+## Validation
+
+優先使用可重現的 tests、typecheck、lint、build、schema/state assertions。只有 deterministic checks 無法覆蓋的 AI 行為，才考慮 eval。
+
+Reviewer 只在其獨立性值得成本時啟用，並應檢查 evidence，而不是只相信 Builder 的成功宣告。
+
+## Completion
+
+完成至少代表：
+
+- acceptance criteria 已符合；
+- 相關 validation 已執行；
+- 沒有未經同意的 scope expansion；
+- 重要產品變更已回寫 `PRODUCT.md` / `ROADMAP.md`；
+- 重要架構決策已回寫 `DECISIONS.md`；
+- `CURRENT_TASK.md` 已留下結果與限制。
